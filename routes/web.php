@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DataReferensiSiakadController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ManualController;
 use App\Http\Controllers\ModulePlaceholderController;
 use App\Http\Controllers\Public\PublicDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,12 @@ Route::middleware(['auth', 'sipepeng.access'])->group(function () use ($dashboar
     Route::get('/dashboard', DashboardController::class)
         ->middleware("role:{$dashboardRoles}")
         ->name('dashboard');
+
+    Route::prefix('panduan')->name('manual.')->middleware("role:{$dashboardRoles}")->group(function (): void {
+        Route::get('/', [ManualController::class, 'index'])->name('index');
+        Route::get('/{module}/pdf', [ManualController::class, 'pdf'])->name('pdf');
+        Route::get('/{module}', [ManualController::class, 'show'])->name('show');
+    });
 
     Route::prefix('notifications')
         ->name('notifications.')

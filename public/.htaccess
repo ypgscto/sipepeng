@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # Subfolder sementara (IP tanpa domain), sesuaikan path:
+    # RewriteBase /sipepeng/public
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

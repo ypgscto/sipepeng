@@ -175,6 +175,7 @@ php artisan config:cache
 | Login | `/login` — akun SIAKAD-GS |
 | CSS/JS | DevTools → Network → `/build/` |
 | Maskot | Bounce kiri bawah dashboard; popup motivasi |
+| **Panduan / SOP** | Menu sidebar + `https://.../panduan` — `scripts\verify-panduan.bat` |
 | Modul utama | Buka Penelitian / PKM / HKI (sesuai role) |
 | Upload | Unggah PDF kecil |
 | Siakad | `php scripts\test-siakad-connection.php` |

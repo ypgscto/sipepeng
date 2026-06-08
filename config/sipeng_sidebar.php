@@ -19,6 +19,12 @@ return [
                     'active_routes' => ['admin.reports.*'],
                     'roles' => ['super_admin', 'admin_lppm', 'ketua_lppm', 'pimpinan', 'ketua_prodi', 'dosen'],
                 ],
+                [
+                    'label' => 'Panduan / SOP',
+                    'route' => 'manual.index',
+                    'icon' => 'book',
+                    'active_routes' => ['manual.*'],
+                ],
             ],
         ],
         [
