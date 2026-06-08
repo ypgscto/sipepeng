@@ -1,0 +1,256 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Pink / rose theme */
+    --color-sipeng-navy-950: #500724;
+    --color-sipeng-navy-900: #831843;
+    --color-sipeng-navy-800: #9d174d;
+    --color-sipeng-navy-700: #be185d;
+    --color-sipeng-teal-700: #db2777;
+    --color-sipeng-teal-600: #ec4899;
+    --color-sipeng-teal-500: #f472b6;
+    /* Legacy aliases */
+    --color-sipeng-950: #500724;
+    --color-sipeng-900: #831843;
+    --color-sipeng-800: #9d174d;
+    --color-sipeng-700: #db2777;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+@layer components {
+    .sipeng-card {
+        @apply bg-white rounded-xl border border-slate-200/90 shadow-sm;
+    }
+
+    .sipeng-card-body {
+        @apply p-5 sm:p-6;
+    }
+
+    .sipeng-page {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 space-y-5;
+    }
+
+    .sipeng-btn-primary {
+        @apply inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 text-sm font-semibold rounded-lg
+            bg-pink-600 text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500
+            focus:ring-offset-2 transition shadow-sm disabled:opacity-50 disabled:pointer-events-none;
+    }
+
+    .sipeng-btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 text-sm font-semibold rounded-lg
+            bg-white text-slate-800 hover:bg-slate-50 border border-slate-300 transition
+            focus:outline-none focus:ring-2 focus:ring-pink-500/30;
+    }
+
+    .sipeng-btn-danger {
+        @apply inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 text-sm font-semibold rounded-lg
+            bg-rose-600 text-white hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500
+            focus:ring-offset-2 transition shadow-sm;
+    }
+
+    .sipeng-btn-table {
+        @apply inline-flex items-center justify-center min-h-[36px] px-3 py-1.5 text-xs font-semibold rounded-md
+            bg-pink-50 text-pink-800 border border-pink-200 hover:bg-pink-100 transition;
+    }
+
+    .sipeng-footer {
+        @apply fixed bottom-0 inset-x-0 z-40 shrink-0 border-t border-pink-700/30
+            bg-gradient-to-r from-pink-950 via-pink-900 to-rose-900 text-white shadow-[0_-4px_12px_rgba(0,0,0,0.12)];
+    }
+
+    .sipeng-content-pad-footer {
+        @apply pb-16 sm:pb-[4.25rem];
+    }
+
+    .sipeng-label {
+        @apply block text-sm font-semibold text-slate-700 mb-1.5;
+    }
+
+    .sipeng-label-required::after {
+        content: ' *';
+        @apply text-rose-600;
+    }
+
+    .sipeng-input {
+        @apply block w-full min-h-[44px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900
+            shadow-sm placeholder:text-slate-400 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500/25;
+    }
+
+    .sipeng-input-readonly {
+        @apply bg-slate-50 text-slate-600 cursor-not-allowed;
+    }
+
+    textarea.sipeng-input {
+        @apply min-h-[88px] py-2.5;
+    }
+
+    select.sipeng-input {
+        @apply pr-9;
+    }
+
+    .sipeng-table-wrap {
+        @apply overflow-x-auto relative;
+    }
+
+    .sipeng-table-wrap::after {
+        content: '';
+        @apply pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-white/90 to-transparent sm:hidden;
+    }
+
+    .sipeng-table {
+        @apply min-w-full divide-y divide-slate-200 text-sm;
+    }
+
+    .sipeng-table thead {
+        @apply bg-slate-50 sticky top-0 z-10;
+    }
+
+    .sipeng-table th {
+        @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-slate-600;
+    }
+
+    .sipeng-table td {
+        @apply px-4 py-3 text-slate-800 align-middle;
+    }
+
+    .sipeng-table tbody tr {
+        @apply hover:bg-pink-50/40 transition-colors;
+    }
+
+    .sipeng-sidebar-group-label {
+        @apply px-3 pt-4 pb-1 text-[10px] font-bold uppercase tracking-widest text-pink-200/70;
+    }
+
+    .sipeng-sidebar-link {
+        @apply flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition min-h-[44px];
+    }
+
+    .sipeng-sidebar-link-active {
+        @apply bg-pink-600 text-white shadow-md border border-pink-500/30;
+    }
+
+    .sipeng-sidebar-link-inactive {
+        @apply text-slate-200 hover:bg-white/10 hover:text-white;
+    }
+
+    .sipeng-filter-toggle {
+        @apply w-full flex items-center justify-between gap-2 px-4 py-3 text-sm font-semibold text-slate-800
+            bg-slate-50 border-b border-slate-200 sm:hidden;
+    }
+
+    .sipeng-mascot-corner {
+        @apply fixed bottom-[4.25rem] sm:bottom-[4.75rem] left-2 sm:left-5 w-20 sm:w-32 lg:w-40 xl:w-48 z-30 pointer-events-none select-none;
+    }
+
+    .sipeng-mascot-bounce {
+        animation: sipeng-mascot-idle 3s ease-in-out infinite;
+        transform-origin: center bottom;
+    }
+
+    .sipeng-mascot-bounce--attention {
+        animation: sipeng-mascot-attention 0.6s ease;
+    }
+
+    .sipeng-mascot-assistant-trigger:hover .sipeng-mascot-bounce:not(.sipeng-mascot-bounce--attention),
+    .sipeng-mascot-assistant-trigger:focus-visible .sipeng-mascot-bounce:not(.sipeng-mascot-bounce--attention) {
+        animation-duration: 2.2s;
+    }
+
+    @keyframes sipeng-mascot-idle {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    @keyframes sipeng-mascot-attention {
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.08);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .sipeng-mascot-bounce {
+            animation: none;
+        }
+    }
+
+    .sipeng-mascot-main {
+        @apply w-20 sm:w-28 lg:w-36 xl:w-40 select-none drop-shadow-xl;
+    }
+
+    .sipeng-mascot-assistant-trigger {
+        @apply block p-0 border-0 bg-transparent cursor-pointer rounded-2xl
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2;
+    }
+
+    .sipeng-motivation-popup {
+        @apply absolute bottom-full left-0 mb-3 w-[min(18rem,calc(100vw-2rem))] sm:w-80
+            rounded-xl border border-pink-100 bg-white shadow-xl ring-1 ring-pink-100/80
+            p-4 z-40 pointer-events-auto;
+    }
+
+    @media (min-width: 640px) {
+        .sipeng-motivation-popup {
+            @apply left-full bottom-0 ml-3 mb-0;
+        }
+    }
+
+    .sipeng-motivation-popup-header {
+        @apply flex items-start justify-between gap-3 mb-3;
+    }
+
+    .sipeng-motivation-popup-title {
+        @apply text-sm font-bold text-pink-900 leading-tight;
+    }
+
+    .sipeng-motivation-popup-subtitle {
+        @apply text-[11px] text-slate-500 mt-0.5;
+    }
+
+    .sipeng-motivation-popup-close {
+        @apply shrink-0 h-8 w-8 inline-flex items-center justify-center rounded-lg
+            text-slate-400 hover:text-slate-700 hover:bg-slate-100 text-xl leading-none transition;
+    }
+
+    .sipeng-motivation-popup-quote {
+        @apply text-sm text-slate-700 leading-relaxed italic border-l-4 border-pink-300 pl-3;
+    }
+
+    .sipeng-motivation-popup-source {
+        @apply mt-2 text-xs font-semibold text-pink-800;
+    }
+
+    .sipeng-motivation-popup-actions {
+        @apply mt-4 flex justify-end;
+    }
+
+    .sipeng-motivation-popup-next {
+        @apply inline-flex items-center justify-center min-h-[36px] px-3 py-1.5 text-xs font-semibold
+            rounded-lg bg-pink-50 text-pink-800 border border-pink-200 hover:bg-pink-100 transition;
+    }
+
+    .sipeng-mascot-login {
+        @apply absolute bottom-0 translate-y-[30%] -left-3 sm:-left-8 md:-left-10 w-24 sm:w-32 md:w-40 lg:w-44 z-20 pointer-events-none select-none;
+    }
+}
