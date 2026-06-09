@@ -41,7 +41,14 @@ return [
         '4' => [],
     ],
 
+    /*
+    | Pemetaan LevelID Siakad (kolom LevelID / level_id) ke peran SiPepeng.
+    | Kepala Lembaga institusi sering memakai level_id 91 di Siakad-GS.
+    |
+    | @var array<string, list<string>>
+    */
     'level_id_role_map' => [
+        '91' => ['ketua_lppm'],
         '100' => ['mahasiswa'],
     ],
 

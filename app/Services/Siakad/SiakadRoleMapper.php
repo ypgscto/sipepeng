@@ -17,6 +17,11 @@ class SiakadRoleMapper
             return $fromOverride;
         }
 
+        $levelRoles = $this->rolesFromLevelId($profile);
+        if ($levelRoles !== []) {
+            return $levelRoles;
+        }
+
         if (isset($profile['sipepeng_roles']) && is_array($profile['sipepeng_roles'])) {
             return $this->filterValidRoles($this->normalizeRoleList($profile['sipepeng_roles']));
         }
@@ -44,10 +49,31 @@ class SiakadRoleMapper
             return $this->filterValidRoles($fromJenis);
         }
 
-        $levelId = (string) ($profile['level_id'] ?? '');
+        $levelId = (string) ($profile['level_id'] ?? $profile['levelid'] ?? $profile['LevelID'] ?? '');
         $fromLevel = config('sipepeng_siakad_auth.level_id_role_map')[$levelId] ?? [];
 
         return $this->filterValidRoles($fromLevel);
+    }
+
+    /**
+     * Prioritas level_id (mis. 91 = Ketua LPPM) di atas jenis_user generik.
+     *
+     * @param  array<string, mixed>  $profile
+     * @return list<string>
+     */
+    protected function rolesFromLevelId(array $profile): array
+    {
+        $levelId = trim((string) ($profile['level_id'] ?? $profile['levelid'] ?? $profile['LevelID'] ?? ''));
+        if ($levelId === '') {
+            return [];
+        }
+
+        $codes = $this->codesForMap('level_id', $levelId);
+        if ($codes === []) {
+            $codes = config('sipepeng_siakad_auth.level_id_role_map')[$levelId] ?? [];
+        }
+
+        return $this->filterValidRoles($codes);
     }
 
     /**
@@ -58,14 +84,9 @@ class SiakadRoleMapper
     {
         $codes = [];
         $jenisUser = trim((string) ($profile['jenis_user'] ?? ''));
-        $levelId = trim((string) ($profile['level_id'] ?? ''));
 
         if ($jenisUser !== '') {
             $codes = array_merge($codes, $this->codesForMap('jenis_user', $jenisUser));
-        }
-
-        if ($levelId !== '') {
-            $codes = array_merge($codes, $this->codesForMap('level_id', $levelId));
         }
 
         return $this->filterValidRoles($codes);

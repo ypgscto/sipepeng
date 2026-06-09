@@ -20,6 +20,8 @@ class SipepengRoleSeeder extends Seeder
                 'code' => 'ketua_lppm',
                 'name' => 'Ketua LPPM',
                 'description' => 'Pimpinan LPPM, dashboard dan laporan institusi.',
+                'siakad_map_type' => 'level_id',
+                'siakad_map_key' => '91',
                 'sort_order' => 20,
             ],
             [
@@ -55,7 +57,7 @@ class SipepengRoleSeeder extends Seeder
             [
                 'code' => 'pimpinan',
                 'name' => 'Pimpinan',
-                'description' => 'Pimpinan institusi, akses dashboard rekap.',
+                'description' => 'Pimpinan institusi / Kepala Lembaga, akses dashboard rekap.',
                 'siakad_map_type' => 'jenis_user',
                 'siakad_map_key' => '5',
                 'sort_order' => 70,
