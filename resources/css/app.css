@@ -196,7 +196,7 @@
     }
 
     .sipeng-mascot-main {
-        @apply w-20 sm:w-28 lg:w-36 xl:w-40 select-none drop-shadow-xl;
+        @apply w-20 sm:w-28 lg:w-36 xl:w-40 select-none;
     }
 
     .sipeng-mascot-assistant-trigger {

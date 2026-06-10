@@ -3,7 +3,7 @@
 ])
 
 @php
-    $src = asset('images/sipepeng-mascot.png');
+    $src = asset(config('sipepeng_settings.mascot.image', 'images/sipepeng-mascot-source.png'));
     $alt = 'Maskot '.($sipengBranding['app_name'] ?? 'SiPepeng');
 @endphp
 
@@ -13,7 +13,7 @@
             <img
                 src="{{ $src }}"
                 alt="{{ $alt }}"
-                class="block w-full h-full object-contain pointer-events-none select-none drop-shadow-2xl"
+                class="block w-full h-full object-contain pointer-events-none select-none"
                 draggable="false"
             >
         </span>
@@ -27,7 +27,7 @@
         <img
             src="{{ $src }}"
             alt="{{ $alt }}"
-            class="block w-full h-full object-contain pointer-events-none select-none drop-shadow-xl"
+            class="block w-full h-full object-contain pointer-events-none select-none"
             draggable="false"
         >
     </span>

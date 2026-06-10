@@ -21,6 +21,14 @@ return [
         'filename' => 'institution-logo',
     ],
 
+    /*
+    | Maskot tampilan (file asli, tanpa filter CSS). Favicon terpisah.
+    */
+    'mascot' => [
+        'image' => 'images/sipepeng-mascot-source.png',
+        'favicon' => 'images/sipepeng_maskot_icon.png',
+    ],
+
     'backup' => [
         'disk' => 'local',
         'directory' => 'backups',

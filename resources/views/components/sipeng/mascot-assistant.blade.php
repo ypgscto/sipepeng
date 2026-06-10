@@ -2,7 +2,7 @@
     $quotes = config('sipepeng_motivation.quotes', []);
     $intervalMs = (int) config('sipepeng_motivation.interval_minutes', 5) * 60 * 1000;
     $snoozeMs = (int) config('sipepeng_motivation.snooze_minutes', 5) * 60 * 1000;
-    $mascotSrc = asset('images/sipepeng-mascot.png');
+    $mascotSrc = asset(config('sipepeng_settings.mascot.image', 'images/sipepeng-mascot-source.png'));
     $appName = $sipengBranding['app_name'] ?? 'SiPepeng';
 @endphp
 
