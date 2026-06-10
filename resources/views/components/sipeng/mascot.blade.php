@@ -3,10 +3,10 @@
 ])
 
 @php
-    $mascotPath = config('sipepeng_settings.mascot.image', 'images/sipepeng-mascot.png');
+    $mascotPath = config('sipepeng_settings.mascot.image', 'images/sipepengmaskot_bg.png');
     $src = file_exists(public_path($mascotPath))
         ? asset($mascotPath)
-        : asset('images/sipepeng-mascot.png');
+        : asset('images/sipepengmaskot_bg.png');
     $alt = 'Maskot '.($sipengBranding['app_name'] ?? 'SiPepeng');
 @endphp
 
