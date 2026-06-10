@@ -14,6 +14,16 @@ return [
     'auto_allow_login_on_first_login' => (bool) env('SIPEPENG_AUTO_ALLOW_LOGIN_ON_FIRST_LOGIN', false),
 
     /*
+    | User baru dari sinkronisasi Siakad langsung boleh login (default: false).
+    */
+    'auto_allow_login_on_sync' => (bool) env('SIPEPENG_AUTO_ALLOW_LOGIN_ON_SYNC', false),
+
+    /*
+    | Peran dari Siakad diterapkan ulang saat sinkronisasi (default: false).
+    */
+    'apply_siakad_roles_on_sync_update' => (bool) env('SIPEPENG_APPLY_SIAKAD_ROLES_ON_SYNC_UPDATE', false),
+
+    /*
     | Fallback login lokal (super_admin) jika Siakad tidak tersedia.
     | Nonaktifkan di produksi kecuali diperlukan untuk maintenance.
     */

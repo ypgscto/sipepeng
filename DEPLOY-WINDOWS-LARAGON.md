@@ -299,21 +299,27 @@ Document root harus ke folder **`public`**, bukan root proyek.
 
 Jika document root sementara masih ke folder proyek (bukan `public/`), file `index.php` dan `.htaccess` di root proyek akan meneruskan ke `public/`. Tetap disarankan vhost langsung ke `public/`.
 
-### Subfolder (kurang ideal)
+### Subfolder (jika URL seperti `http://98.142.245.18/sipepeng/`)
 
-Jika URL seperti `http://IP/sipepeng/public`:
+Panduan lengkap IP sementara: **[docs/DEPLOY-IP-TEMPORARY.md](docs/DEPLOY-IP-TEMPORARY.md)**
 
 1. Di `.env`:
    ```env
-   APP_URL=http://IP/sipepeng/public
+   APP_URL=http://98.142.245.18/sipepeng
+   SESSION_SECURE_COOKIE=false
    ```
-2. Edit `public\.htaccess`, tambahkan setelah `RewriteEngine On`:
+   *(Ganti IP sesuai server. `SESSION_SECURE_COOKIE=false` untuk HTTP sementara.)*
+2. Edit `public\.htaccess`, aktifkan baris:
    ```apache
    RewriteBase /sipepeng/public
    ```
-3. `php artisan config:clear` lalu `php artisan config:cache`
+3. Setelah ubah `.env`:
+   ```bat
+   php artisan config:clear
+   php artisan config:cache
+   ```
 
-SiPepeng sudah menyesuaikan `session.path` otomatis dari URL root (lihat `AppServiceProvider`).
+Middleware `ConfigureSubfolderSession` menyesuaikan URL & cookie session otomatis dari path request.
 
 ---
 

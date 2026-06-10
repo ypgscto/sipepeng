@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\Settings\SettingsLogoController;
 use App\Http\Controllers\Admin\Settings\SettingsRoleController;
 use App\Http\Controllers\Admin\Settings\SettingsSiakadController;
 use App\Http\Controllers\Admin\Settings\SettingsTemplateController;
+use App\Http\Controllers\Admin\Settings\SettingsUsersController;
+use App\Http\Controllers\Admin\Settings\SettingsUserSyncController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('settings.access:view')->group(function (): void {
@@ -26,6 +28,15 @@ Route::middleware('settings.access:manage')->group(function (): void {
 
     Route::get('/mapping-role', [SettingsRoleController::class, 'index'])->name('roles.index');
     Route::put('/mapping-role/{role}', [SettingsRoleController::class, 'update'])->name('roles.update');
+
+    Route::get('/sinkronisasi-user', [SettingsUserSyncController::class, 'index'])->name('user-sync.index');
+    Route::post('/sinkronisasi-user', [SettingsUserSyncController::class, 'run'])
+        ->middleware('throttle:3,10')
+        ->name('user-sync.run');
+
+    Route::get('/pengguna', [SettingsUsersController::class, 'index'])->name('users.index');
+    Route::get('/pengguna/{user}/edit', [SettingsUsersController::class, 'edit'])->name('users.edit');
+    Route::put('/pengguna/{user}', [SettingsUsersController::class, 'update'])->name('users.update');
 });
 
 Route::middleware('settings.access:backup')->group(function (): void {

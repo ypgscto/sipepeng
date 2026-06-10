@@ -4,7 +4,7 @@
     <div class="sipeng-page">
         <x-sipeng.page-header
             title="Pengaturan SiPepeng"
-            description="Kelola profil institusi, integrasi SIAKAD, mapping role, template, dan backup database."
+            description="Kelola profil institusi, integrasi SIAKAD, sinkron user login, mapping role, template, dan backup database."
         />
 
         @include('admin.settings.partials.nav', ['canBackup' => $canBackup])
@@ -32,6 +32,18 @@
                 <div class="sipeng-card-body">
                     <p class="font-semibold text-slate-900 group-hover:text-emerald-800">Mapping Role</p>
                     <p class="text-xs text-slate-500 mt-1">Petakan jenis user SIAKAD ke role SiPepeng.</p>
+                </div>
+            </a>
+            <a href="{{ route('admin.settings.user-sync.index') }}" class="sipeng-card group hover:border-emerald-300 transition">
+                <div class="sipeng-card-body">
+                    <p class="font-semibold text-slate-900 group-hover:text-emerald-800">Sinkronisasi User Login</p>
+                    <p class="text-xs text-slate-500 mt-1">Tarik akun Siakad (termasuk karyawan-only) ke database lokal.</p>
+                </div>
+            </a>
+            <a href="{{ route('admin.settings.users.index') }}" class="sipeng-card group hover:border-emerald-300 transition">
+                <div class="sipeng-card-body">
+                    <p class="font-semibold text-slate-900 group-hover:text-emerald-800">Pengaturan Pengguna</p>
+                    <p class="text-xs text-slate-500 mt-1">Aktifkan login dan tetapkan peran SiPepeng.</p>
                 </div>
             </a>
             <a href="{{ route('admin.settings.templates.index') }}" class="sipeng-card group hover:border-emerald-300 transition">

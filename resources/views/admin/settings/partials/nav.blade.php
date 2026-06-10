@@ -5,6 +5,8 @@
         ['route' => 'admin.settings.logo.edit', 'label' => 'Logo Institusi', 'icon' => 'certificate'],
         ['route' => 'admin.settings.siakad.edit', 'label' => 'SIAKAD-API', 'icon' => 'database'],
         ['route' => 'admin.settings.roles.index', 'label' => 'Mapping Role', 'icon' => 'community'],
+        ['route' => 'admin.settings.user-sync.index', 'label' => 'Sinkron User', 'icon' => 'sync'],
+        ['route' => 'admin.settings.users.index', 'label' => 'Pengguna', 'icon' => 'community'],
         ['route' => 'admin.settings.templates.index', 'label' => 'Template', 'icon' => 'document'],
     ];
 

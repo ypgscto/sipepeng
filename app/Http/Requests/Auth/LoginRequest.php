@@ -133,7 +133,8 @@ class LoginRequest extends FormRequest
             $profile['email'] = $normalized;
         }
 
-        if (trim((string) ($profile['siakad_user_id'] ?? '')) === '') {
+        $siakadUserId = trim((string) ($profile['siakad_user_id'] ?? ''));
+        if ($siakadUserId === '' || $siakadUserId === '0') {
             $profile['siakad_user_id'] = (string) ($profile['login'] ?? $login);
         }
 

@@ -25,6 +25,9 @@ return [
         SiakadResource::DOSEN => env('SIAKAD_ENDPOINT_DOSEN', '/api/simawa/dosen'),
         SiakadResource::MAHASISWA => env('SIAKAD_ENDPOINT_MAHASISWA', '/api/simawa/mahasiswa'),
         SiakadResource::STATUS_MAHASISWA => env('SIAKAD_ENDPOINT_STATUS_MAHASISWA', '/api/simawa/status-mahasiswa'),
+        SiakadResource::LOGIN_USERS => env('SIAKAD_ENDPOINT_LOGIN_USERS', '/api/sipepeng/login-users'),
     ],
+
+    'sync_max_execution_seconds' => (int) env('SIAKAD_SYNC_MAX_EXECUTION_SECONDS', 900),
 
 ];

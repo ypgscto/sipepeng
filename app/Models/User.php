@@ -117,6 +117,27 @@ class User extends Authenticatable
         return filled($this->siakad_user_id) || filled($this->siakad_login);
     }
 
+    public function scopeSiakadSourced($query)
+    {
+        return $query->where(function ($inner): void {
+            $inner->whereNotNull('siakad_user_id')
+                ->where('siakad_user_id', '!=', '')
+                ->orWhereNotNull('siakad_login')
+                ->where('siakad_login', '!=', '');
+        });
+    }
+
+    public function scopeLocalOnly($query)
+    {
+        return $query->where(function ($inner): void {
+            $inner->whereNull('siakad_user_id')
+                ->orWhere('siakad_user_id', '=', '');
+        })->where(function ($inner): void {
+            $inner->whereNull('siakad_login')
+                ->orWhere('siakad_login', '=', '');
+        });
+    }
+
     public function lppmNotifications(): HasMany
     {
         return $this->hasMany(\App\Models\Notification\LppmNotification::class);

@@ -14,6 +14,8 @@ final class SiakadResource
 
     public const STATUS_MAHASISWA = 'status_mahasiswa';
 
+    public const LOGIN_USERS = 'login_users';
+
     /**
      * @return list<string>
      */
@@ -25,6 +27,7 @@ final class SiakadResource
             self::DOSEN,
             self::MAHASISWA,
             self::STATUS_MAHASISWA,
+            self::LOGIN_USERS,
         ];
     }
 }

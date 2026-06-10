@@ -85,7 +85,7 @@ class SiakadUserProvisionService
     protected function identityAttributes(array $profile, string $login, string $jenisUser): array
     {
         return [
-            'siakad_user_id' => (string) ($profile['siakad_user_id'] ?? $login),
+            'siakad_user_id' => $this->normalizeSiakadUserId($profile, $login),
             'siakad_login' => $login,
             'name' => (string) ($profile['nama'] ?? $profile['name'] ?? $login),
             'email' => $this->resolveEmail($profile, $login),
@@ -102,7 +102,7 @@ class SiakadUserProvisionService
     protected function findExistingUser(array $profile, string $login): ?User
     {
         $email = $this->resolveEmail($profile, $login);
-        $siakadUserId = (string) ($profile['siakad_user_id'] ?? $login);
+        $siakadUserId = $this->normalizeSiakadUserId($profile, $login);
         $formLogin = strtolower(trim((string) ($profile['_form_login'] ?? '')));
 
         return User::query()
@@ -231,5 +231,20 @@ class SiakadUserProvisionService
         }
 
         return $roleCodes[0];
+    }
+
+    /**
+     * @param  array<string, mixed>  $profile
+     */
+    protected function normalizeSiakadUserId(array $profile, string $login): string
+    {
+        $id = trim((string) ($profile['siakad_user_id'] ?? ''));
+        if ($id !== '' && $id !== '0') {
+            return $id;
+        }
+
+        $resolvedLogin = trim((string) ($profile['login'] ?? $login));
+
+        return $resolvedLogin !== '' ? $resolvedLogin : $login;
     }
 }
