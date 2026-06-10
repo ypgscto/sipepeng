@@ -94,7 +94,7 @@ class SiakadLoginTest extends TestCase
         $this->assertAuthenticatedAs($user->fresh());
     }
 
-    public function test_logout_redirects_to_login(): void
+    public function test_logout_redirects_to_public_landing(): void
     {
         $user = User::factory()->create([
             'is_active' => true,
@@ -112,13 +112,13 @@ class SiakadLoginTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('logout'))
-            ->assertRedirect(route('login'));
+            ->assertRedirect(route('public.landing'));
 
         $this->assertGuest();
 
         $this->actingAs($user)
             ->get(route('logout'))
-            ->assertRedirect(route('login'));
+            ->assertRedirect(route('public.landing'));
 
         $this->assertGuest();
     }

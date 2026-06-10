@@ -3,7 +3,7 @@
 ])
 
 @php
-    $src = asset('images/sipepengmaskot_bg.png');
+    $src = asset('images/sipepeng-mascot.png');
     $alt = 'Maskot '.($sipengBranding['app_name'] ?? 'SiPepeng');
 @endphp
 
