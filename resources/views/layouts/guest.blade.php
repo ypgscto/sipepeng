@@ -22,10 +22,10 @@
                 <p class="text-xs text-pink-800 font-semibold mt-1">{{ $sipengBranding['institution_name'] }} — {{ $sipengBranding['module'] }}</p>
             </div>
 
-            <div class="relative">
-                <x-sipeng.mascot variant="login" class="sipeng-mascot-login" />
+            <div class="relative overflow-visible pb-2 sm:pb-3">
+                <x-sipeng.mascot variant="login" />
 
-                <div class="sipeng-card shadow-xl border-t-4 border-t-pink-500 ring-1 ring-pink-100/80 relative z-10">
+                <div class="sipeng-card shadow-xl border-t-4 border-t-pink-500 ring-1 ring-pink-100/80 relative z-10 bg-white">
                     <div class="sipeng-card-body py-4 sm:py-5">
                         @yield('content')
                     </div>

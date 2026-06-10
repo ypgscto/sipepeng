@@ -2,10 +2,6 @@
     $quotes = config('sipepeng_motivation.quotes', []);
     $intervalMs = (int) config('sipepeng_motivation.interval_minutes', 5) * 60 * 1000;
     $snoozeMs = (int) config('sipepeng_motivation.snooze_minutes', 5) * 60 * 1000;
-    $mascotPath = config('sipepeng_settings.mascot.image', 'images/sipepengmaskot_bg.png');
-    $mascotSrc = file_exists(public_path($mascotPath))
-        ? asset($mascotPath)
-        : asset('images/sipepengmaskot_bg.png');
     $appName = $sipengBranding['app_name'] ?? 'SiPepeng';
 @endphp
 
@@ -29,12 +25,7 @@
                 @click="openFromClick()"
             >
                 <span class="sipeng-mascot-bounce block" :class="open && 'sipeng-mascot-bounce--attention'">
-                    <img
-                        src="{{ $mascotSrc }}"
-                        alt="Maskot {{ $appName }}"
-                        class="sipeng-mascot-main"
-                        draggable="false"
-                    >
+                    <x-sipeng.mascot variant="assistant" />
                 </span>
                 <span class="sr-only">Klik untuk motivasi LPPM</span>
             </button>

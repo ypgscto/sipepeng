@@ -22,10 +22,12 @@ return [
     ],
 
     /*
-    | Maskot tampilan — PNG berkualitas penuh. Favicon terpisah.
+    | Maskot — sipepengmaskot_bg.png (sumber), *-400w/520w/780w (tampilan tajam).
+    | Jalankan: php scripts/generate-mascot-display.php
     */
     'mascot' => [
         'image' => 'images/sipepengmaskot_bg.png',
+        'image_display' => 'images/sipepeng-maskot-520w.png',
         'favicon' => 'images/sipepeng_maskot_icon.png',
     ],
 

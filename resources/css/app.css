@@ -150,12 +150,55 @@
     }
 
     .sipeng-mascot-corner {
-        @apply fixed bottom-[4.25rem] sm:bottom-[4.75rem] left-2 sm:left-5 w-20 sm:w-32 lg:w-40 xl:w-48 z-30 pointer-events-none select-none;
+        @apply fixed bottom-[4.25rem] sm:bottom-[4.75rem] left-2 sm:left-5 z-30 pointer-events-none select-none;
+    }
+
+    .sipeng-mascot-figure {
+        @apply flex shrink-0 items-center justify-center;
+    }
+
+    .sipeng-mascot-figure__motion {
+        @apply relative h-full w-full;
+        animation: sipeng-mascot-idle 3s ease-in-out infinite;
+    }
+
+    .sipeng-mascot-figure__img {
+        @apply h-full w-full object-contain pointer-events-none select-none;
+    }
+
+    .sipeng-mascot-figure--login {
+        width: 9.5rem;
+        height: 9.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .sipeng-mascot-figure--login {
+            width: 11.5rem;
+            height: 11.5rem;
+        }
+    }
+
+    .sipeng-mascot-figure--corner,
+    .sipeng-mascot-figure--assistant {
+        width: 13rem;
+        height: 13rem;
+    }
+
+    @media (min-width: 640px) {
+        .sipeng-mascot-figure--corner,
+        .sipeng-mascot-figure--assistant {
+            width: 16rem;
+            height: 16rem;
+        }
     }
 
     .sipeng-mascot-bounce {
+        @apply relative block;
         animation: sipeng-mascot-idle 3s ease-in-out infinite;
-        transform-origin: center bottom;
+    }
+
+    .sipeng-mascot-bounce .sipeng-mascot-figure__motion {
+        animation: none;
     }
 
     .sipeng-mascot-bounce--attention {
@@ -170,33 +213,30 @@
     @keyframes sipeng-mascot-idle {
         0%,
         100% {
-            transform: translateY(0);
+            top: 0;
         }
 
         50% {
-            transform: translateY(-5px);
+            top: -5px;
         }
     }
 
     @keyframes sipeng-mascot-attention {
         0%,
         100% {
-            transform: scale(1);
+            top: 0;
         }
 
         50% {
-            transform: scale(1.08);
+            top: -8px;
         }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .sipeng-mascot-bounce {
+        .sipeng-mascot-bounce,
+        .sipeng-mascot-figure__motion {
             animation: none;
         }
-    }
-
-    .sipeng-mascot-main {
-        @apply w-20 sm:w-28 lg:w-36 xl:w-40 select-none;
     }
 
     .sipeng-mascot-assistant-trigger {
@@ -251,6 +291,7 @@
     }
 
     .sipeng-mascot-login {
-        @apply absolute bottom-0 translate-y-[30%] -left-3 sm:-left-8 md:-left-10 w-24 sm:w-32 md:w-40 lg:w-44 z-20 pointer-events-none select-none;
+        @apply absolute bottom-0 z-0 translate-y-[42%] -left-[4.25rem] sm:-left-[5.5rem] md:-left-[6.5rem]
+            pointer-events-none select-none;
     }
 }

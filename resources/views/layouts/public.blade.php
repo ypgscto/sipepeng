@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-gradient-to-b from-pink-50/50 to-slate-50 text-slate-800 min-h-dvh flex flex-col">
-    <x-sipeng.mascot class="sipeng-mascot-corner" />
+    <x-sipeng.mascot variant="corner" />
 
     <header class="bg-white border-b border-pink-100 shadow-sm sticky top-0 z-40 shrink-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
