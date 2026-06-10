@@ -12,6 +12,8 @@ use InvalidArgumentException;
 
 class SiakadUserSyncService
 {
+    use ResolvesSiakadUserIdentity;
+
     public function __construct(
         protected SiakadApiService $api,
         protected SiakadRoleMapper $roleMapper,
@@ -70,14 +72,10 @@ class SiakadUserSyncService
             'synced_at' => now(),
         ];
 
-        $user = User::query()
-            ->where('siakad_user_id', $siakadUserId)
-            ->orWhere('siakad_login', $login)
-            ->orWhere('email', $email)
-            ->first();
+        $user = $this->findExistingSiakadUser($login, $email, $siakadUserId);
 
         if ($user) {
-            $user->update($identity);
+            $this->applySiakadIdentity($user, $identity);
 
             if (config('sipepeng_siakad_auth.apply_siakad_roles_on_sync_update', false)) {
                 $this->syncRoleMappings($user, $roles);

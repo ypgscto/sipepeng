@@ -54,4 +54,37 @@ class KaryawanLoginProvisionTest extends TestCase
         $this->assertSame('kalemlp2m', $user->siakad_user_id);
         $this->assertSame('Kepala LP2M Updated', $user->name);
     }
+
+    public function test_login_prefers_email_match_over_duplicate_siakad_user_id_stub(): void
+    {
+        $canonical = User::factory()->create([
+            'name' => 'Sri Wahyuni Bahrun',
+            'email' => 'swbahrun@gmail.com',
+            'siakad_login' => 'swbahrun@gmail.com',
+            'siakad_user_id' => 'swbahrun@gmail.com',
+            'is_allowed_login' => true,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Stub Sync',
+            'email' => 'stub-sync@stikesgunungsari.ac.id',
+            'siakad_user_id' => '148',
+            'siakad_login' => '148',
+        ]);
+
+        $user = app(SiakadUserProvisionService::class)->provisionFromLoginProfile([
+            'login' => 'swbahrun@gmail.com',
+            'nama' => 'Sri Wahyuni Bahrun',
+            'email' => 'swbahrun@gmail.com',
+            'jenis_user' => '8',
+            'level_id' => '91',
+            'siakad_user_id' => 148,
+            '_form_login' => 'swbahrun@gmail.com',
+        ]);
+
+        $this->assertSame($canonical->id, $user->id);
+        $this->assertSame('148', $user->siakad_user_id);
+        $this->assertSame('swbahrun@gmail.com', $user->email);
+        $this->assertSame(1, User::query()->where('email', 'swbahrun@gmail.com')->count());
+    }
 }

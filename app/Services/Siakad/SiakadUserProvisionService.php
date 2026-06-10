@@ -11,6 +11,8 @@ use InvalidArgumentException;
 
 class SiakadUserProvisionService
 {
+    use ResolvesSiakadUserIdentity;
+
     public function __construct(
         protected SiakadRoleMapper $roleMapper,
     ) {}
@@ -31,10 +33,11 @@ class SiakadUserProvisionService
 
         if ($roleCodes === []) {
             if ($existingUser !== null && $existingUser->activeRoles()->exists()) {
-                $existingUser->update(array_merge(
+                $this->applySiakadIdentity(
+                    $existingUser,
                     $this->identityAttributes($profile, $login, $jenisUser),
                     ['is_allowed_login' => $existingUser->is_allowed_login || $this->shouldAllowLogin([])],
-                ));
+                );
 
                 return $existingUser->fresh();
             }
@@ -52,9 +55,9 @@ class SiakadUserProvisionService
         $user = $existingUser;
 
         if ($user) {
-            $user->update(array_merge($identity, [
+            $this->applySiakadIdentity($user, $identity, [
                 'is_allowed_login' => $user->is_allowed_login || $this->shouldAllowLogin($roleCodes),
-            ]));
+            ]);
 
             if (config('sipepeng_siakad_auth.apply_siakad_roles_on_update', false)) {
                 $this->syncRoleMappings($user, $roleCodes);
@@ -105,12 +108,7 @@ class SiakadUserProvisionService
         $siakadUserId = $this->normalizeSiakadUserId($profile, $login);
         $formLogin = strtolower(trim((string) ($profile['_form_login'] ?? '')));
 
-        return User::query()
-            ->where('siakad_user_id', $siakadUserId)
-            ->orWhere('siakad_login', $login)
-            ->when($formLogin !== '', fn ($query) => $query->orWhere('siakad_login', $formLogin)->orWhere('email', $formLogin))
-            ->orWhere('email', $email)
-            ->first();
+        return $this->findExistingSiakadUser($login, $email, $siakadUserId, $formLogin);
     }
 
     protected function defaultAllowedLoginOnFirstLogin(): bool
