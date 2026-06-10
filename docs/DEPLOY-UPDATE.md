@@ -176,6 +176,9 @@ php artisan config:cache
 | CSS/JS | DevTools → Network → `/build/` |
 | Maskot | Bounce kiri bawah dashboard; popup motivasi |
 | **Panduan / SOP** | Menu sidebar + `https://.../panduan` — `scripts\verify-panduan.bat` |
+| **Sinkron User Login** | Pengaturan → Sinkron User Login; sidebar Sistem |
+| **Pengaturan Pengguna** | Aktivasi login & peran akun Siakad |
+| **Favicon** | Tab browser → `/images/sipepeng_maskot_icon.png` |
 | Modul utama | Buka Penelitian / PKM / HKI (sesuai role) |
 | Upload | Unggah PDF kecil |
 | Siakad | `php scripts\test-siakad-connection.php` |
@@ -192,6 +195,8 @@ php artisan config:cache
 | Error 419 login/form | `APP_URL` harus persis URL browser; `SESSION_SECURE_COOKIE=true` di HTTPS |
 | Migrasi gagal | Backup DB; `php artisan migrate:status`; perbaiki error SQL |
 | Siakad gagal | Token/URL; jalankan `scripts\test-siakad-connection.php` |
+| Sinkron user gagal | Endpoint `/api/sipepeng/login-users` di Siakad-API belum terpasang |
+| Duplicate email login | Pull versi terbaru; hapus user stub duplikat di Pengaturan Pengguna |
 | `APP_KEY` invalid | Restore `.env` backup; jangan generate ulang key di production |
 
 ---
@@ -223,4 +228,4 @@ php artisan sipepeng:sync-siakad-super-admin
 
 ---
 
-Lihat juga: [DEPLOY-WINDOWS-LARAGON.md](../DEPLOY-WINDOWS-LARAGON.md), [configuration-env.md](configuration-env.md), [backup-restore.md](backup-restore.md).
+Lihat juga: [DEPLOY-LANGKAH.md](DEPLOY-LANGKAH.md), [DEPLOY-WINDOWS-LARAGON.md](../DEPLOY-WINDOWS-LARAGON.md), [configuration-env.md](configuration-env.md), [backup-restore.md](backup-restore.md).

@@ -10,6 +10,7 @@ Sistem Informasi Penelitian dan Pengabdian Masyarakat — STIKES Gunung Sari (LP
 | [DEPLOY-WINDOWS-LARAGON.md](DEPLOY-WINDOWS-LARAGON.md) | **Deploy production — Windows Server + Laragon** |
 | [DEPLOY.md](DEPLOY.md) | Deploy production — Linux |
 | [docs/DEPLOY-UPDATE.md](docs/DEPLOY-UPDATE.md) | Update versi via `git pull` |
+| [docs/DEPLOY-LANGKAH.md](docs/DEPLOY-LANGKAH.md) | **Langkah deploy production (checklist)** |
 | [docs/DEPLOY-IP-TEMPORARY.md](docs/DEPLOY-IP-TEMPORARY.md) | **Deploy sementara via IP (tanpa domain)** |
 | [docs/configuration-env.md](docs/configuration-env.md) | Variabel `.env` |
 | [docs/getting-started.md](docs/getting-started.md) | Panduan pengguna awal |

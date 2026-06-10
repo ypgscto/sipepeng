@@ -1,6 +1,6 @@
 # Pemindahan SiPepeng ke Windows Server (Laragon)
 
-> **Update aplikasi yang sudah jalan?** Lihat **[docs/DEPLOY-UPDATE.md](docs/DEPLOY-UPDATE.md)** — daftar langkah `git pull`, migrasi, dan checklist verifikasi.
+> **Update aplikasi yang sudah jalan?** Lihat **[docs/DEPLOY-LANGKAH.md](docs/DEPLOY-LANGKAH.md)** (checklist singkat) atau **[docs/DEPLOY-UPDATE.md](docs/DEPLOY-UPDATE.md)** — detail `git pull`, migrasi, dan verifikasi.
 
 Panduan ini untuk **instalasi baru** di server production:
 
