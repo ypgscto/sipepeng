@@ -22,10 +22,10 @@ return [
     ],
 
     /*
-    | Maskot tampilan (file asli, tanpa filter CSS). Favicon terpisah.
+    | Maskot tampilan — PNG transparan (sama pola SIMAWA/Simutu). Favicon terpisah.
     */
     'mascot' => [
-        'image' => 'images/sipepeng-mascot-source.png',
+        'image' => 'images/sipepeng-mascot.png',
         'favicon' => 'images/sipepeng_maskot_icon.png',
     ],
 
