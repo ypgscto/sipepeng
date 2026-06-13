@@ -1,5 +1,7 @@
 const STORAGE_LAST_SHOWN = 'sipeng-motivation-last-shown';
 const STORAGE_DISMISSED = 'sipeng-motivation-dismissed-at';
+const STORAGE_HIDE_TODAY = 'sipeng-motivation-hide-today';
+const STORAGE_HIDE_DATE = 'sipeng-motivation-hide-date';
 
 function readTimestamp(key) {
     const raw = localStorage.getItem(key);
@@ -16,14 +18,51 @@ function writeTimestamp(key) {
     localStorage.setItem(key, String(Date.now()));
 }
 
+function todayKey() {
+    const now = new Date();
+
+    return [
+        now.getFullYear(),
+        String(now.getMonth() + 1).padStart(2, '0'),
+        String(now.getDate()).padStart(2, '0'),
+    ].join('-');
+}
+
+function isHiddenForToday() {
+    const storedDate = localStorage.getItem(STORAGE_HIDE_DATE);
+    const today = todayKey();
+
+    if (storedDate !== today) {
+        localStorage.removeItem(STORAGE_HIDE_TODAY);
+        localStorage.removeItem(STORAGE_HIDE_DATE);
+
+        return false;
+    }
+
+    return localStorage.getItem(STORAGE_HIDE_TODAY) === '1';
+}
+
+function setHiddenForToday(hide) {
+    if (hide) {
+        localStorage.setItem(STORAGE_HIDE_TODAY, '1');
+        localStorage.setItem(STORAGE_HIDE_DATE, todayKey());
+    } else {
+        localStorage.removeItem(STORAGE_HIDE_TODAY);
+        localStorage.removeItem(STORAGE_HIDE_DATE);
+    }
+}
+
 export function registerSipengMascotAssistant(Alpine) {
     Alpine.data('sipengMascotAssistant', (config = {}) => ({
         quotes: Array.isArray(config.quotes) ? config.quotes : [],
+        firstDelayMs: Number(config.firstDelayMs) || 30000,
         intervalMs: Number(config.intervalMs) || 300000,
         snoozeMs: Number(config.snoozeMs) || 300000,
+        peekMode: Boolean(config.peekMode),
         open: false,
         quote: null,
-        _timer: null,
+        _firstTimer: null,
+        _intervalTimer: null,
 
         init() {
             if (this.quotes.length === 0) {
@@ -31,18 +70,25 @@ export function registerSipengMascotAssistant(Alpine) {
             }
 
             this.pickRandom();
-            this._timer = window.setInterval(() => this.tryAutoShow(), this.intervalMs);
-
-            window.setTimeout(() => this.tryAutoShow(), this.intervalMs);
+            this._firstTimer = window.setTimeout(() => this.tryAutoShow(), this.firstDelayMs);
+            this._intervalTimer = window.setInterval(() => this.tryAutoShow(), this.intervalMs);
         },
 
         destroy() {
-            if (this._timer) {
-                window.clearInterval(this._timer);
+            if (this._firstTimer) {
+                window.clearTimeout(this._firstTimer);
+            }
+
+            if (this._intervalTimer) {
+                window.clearInterval(this._intervalTimer);
             }
         },
 
         canAutoShow() {
+            if (isHiddenForToday()) {
+                return false;
+            }
+
             const dismissedAt = readTimestamp(STORAGE_DISMISSED);
             if (dismissedAt !== null && Date.now() - dismissedAt < this.snoozeMs) {
                 return false;
@@ -65,6 +111,12 @@ export function registerSipengMascotAssistant(Alpine) {
         },
 
         openFromClick() {
+            if (this.open) {
+                this.close(false);
+
+                return;
+            }
+
             this.show(true);
         },
 
@@ -89,9 +141,21 @@ export function registerSipengMascotAssistant(Alpine) {
             }
         },
 
-        close() {
+        close(hideForToday = false) {
             this.open = false;
             writeTimestamp(STORAGE_DISMISSED);
+
+            if (hideForToday) {
+                setHiddenForToday(true);
+            }
+        },
+
+        semangat() {
+            this.close(false);
+        },
+
+        hideForToday() {
+            this.close(true);
         },
 
         nextQuote() {

@@ -244,6 +244,14 @@
             focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2;
     }
 
+    .sipeng-mascot-assistant-anchor--peek {
+        @apply pointer-events-none;
+    }
+
+    .sipeng-mascot-assistant-anchor--peek .sipeng-motivation-popup {
+        @apply pointer-events-auto;
+    }
+
     .sipeng-motivation-popup {
         @apply absolute bottom-full left-0 mb-3 w-[min(18rem,calc(100vw-2rem))] sm:w-80
             rounded-xl border border-pink-100 bg-white shadow-xl ring-1 ring-pink-100/80
@@ -282,12 +290,22 @@
     }
 
     .sipeng-motivation-popup-actions {
-        @apply mt-4 flex justify-end;
+        @apply mt-4 flex flex-wrap items-center gap-2;
     }
 
-    .sipeng-motivation-popup-next {
+    .sipeng-motivation-popup-btn-primary {
         @apply inline-flex items-center justify-center min-h-[36px] px-3 py-1.5 text-xs font-semibold
-            rounded-lg bg-pink-50 text-pink-800 border border-pink-200 hover:bg-pink-100 transition;
+            rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition;
+    }
+
+    .sipeng-motivation-popup-btn-secondary {
+        @apply inline-flex items-center justify-center min-h-[36px] px-3 py-1.5 text-xs font-semibold
+            rounded-lg bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition;
+    }
+
+    .sipeng-motivation-popup-btn-link {
+        @apply inline-flex items-center justify-center min-h-[36px] px-2 py-1.5 text-xs font-medium
+            text-pink-700 hover:text-pink-900 hover:underline transition;
     }
 
     .sipeng-mascot-login {
